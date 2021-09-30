@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/png" href="/icons/icon-192x192.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="description" content="Modern React app with PWA" />
+    <link rel="apple-touch-icon" href="/icons/icon-192x192.png" />
+    <link rel="manifest" href="manifest.json" />
+    <title>Google Books</title>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <script>
+      if('serviceWorker' in navigator) {
+        window.addEventListener('load', async () => {
+          try {
+            const res = await navigator.serviceWorker.register('sw.js')
+            console.log('[SW]: registration completed successfully', res.scope)
+          }
+          catch(e) {
+            console.log('[SW]: registration failed')
+          }
+        })
+      }
+    </script>
+  </body>
+</html>

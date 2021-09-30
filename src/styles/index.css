@@ -1,0 +1,50 @@
+@import "~bootstrap/dist/css/bootstrap.min.css";
+@import "./loader.css";
+
+
+button, select, input  {
+  box-shadow: none !important;
+  background: rgb(53, 148, 177);
+}
+
+ul {
+  margin: 0;
+}
+
+.card-body p, .container p{
+  margin: 0;
+}
+
+.card-body::-webkit-scrollbar {
+  width: 7px;
+}
+
+.card-body::-webkit-scrollbar-track {
+  background: #34344d;
+  border-radius: 50px;
+}
+
+.card-body::-webkit-scrollbar-thumb {
+  background: #fff;
+  border-radius: 50px;
+}
+
+@media (min-width: 576px) {
+  header {
+    height: 500px !important;
+  }
+
+  main .noData {
+    left: 48%;
+  }
+
+  .card:hover .card-body{
+    transform: translateY(0);
+    background: rgba(50, 50, 73, 0.97);
+  }
+
+  .card:hover {
+    transform: scale(0.95);
+    cursor: pointer;
+  }
+}
