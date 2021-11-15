@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import { useParams, useHistory } from 'react-router-dom'
 import { useDispatch, useSelector } from "react-redux"
+import DOMPurify from 'dompurify'
 import { REQUEST_BOOK } from '../app/actions'
 import Loader from '../components/Loader'
 
@@ -28,10 +29,11 @@ const Svg = styled.svg`
 
 const BookDetails = styled.div`
   display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
+  flex-direction: column;
+  align-items: center;
   justify-content: center;
   margin: 20px 0 0;
+  gap: 30px;
 `
 
 const Image = styled.img`
@@ -59,7 +61,7 @@ export default function BookPage() {
   const dispatch = useDispatch()
   const history = useHistory()
   const { book, loading } = useSelector(state => state.bookReducer)
-
+  const sanitazeDescription = DOMPurify.sanitize(book?.description)
   
   useEffect(() => {
     dispatch({ type: REQUEST_BOOK, payload: { bookId: params?.bookId }})
@@ -92,7 +94,7 @@ export default function BookPage() {
           <div className="container">
             {book?.title ? <BookTitle>{book?.title}</BookTitle> : ''}
             {book?.subtitle ? <BookSubTitle>{book?.subtitle}</BookSubTitle> : ''}
-            {book?.description ? <div>{book?.description}</div> : ''}
+            {book?.description ? <div dangerouslySetInnerHTML={{__html:sanitazeDescription}}></div> : ''}
             <br />
             {book?.publishedDate ? <p><b>Published Date: </b> {book?.publishedDate}</p> : ''}
             {book?.publisher ? <p><b>Publisher: </b> {book?.publisher}</p> : ''}
